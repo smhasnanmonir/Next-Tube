@@ -11,18 +11,12 @@ import VideoDetails from "@/ApiFetch/VideoDetails";
 import { TailSpin } from "react-loader-spinner";
 
 const VideoPage = ({ params }) => {
-  console.log(params?.id);
   const { data, isLoading } = VideoDetails(params?.id);
-  console.log(data?.formatStreams[2]?.url);
-  console.log(isLoading);
-  const downloadFile = (url) => {
-    window.location.href = url;
-  };
   return (
-    <div className="md:w-3/4 mx-auto py-[2%] md:px-0 grid justify-center">
+    <div className="md:w-3/4 mx-auto py-[2%] md:px-0">
       {isLoading ? (
         <>
-          <div>
+          <div className="grid place-items-center">
             <TailSpin
               height="80"
               width="80"

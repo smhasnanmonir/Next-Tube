@@ -5,9 +5,7 @@ import React from "react";
 import { TailSpin } from "react-loader-spinner";
 
 const SearchPage = ({ params }) => {
-  console.log(params?.text);
   const { data, isLoading } = SearchApi(params?.text);
-  console.log(data);
   return (
     <>
       {isLoading ? (
