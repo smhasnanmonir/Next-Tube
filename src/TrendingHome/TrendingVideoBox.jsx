@@ -22,6 +22,9 @@ const TrendingVideoBox = ({ data }) => {
         <div className="space-y-[3px] pt-[3px]">
           <h1>{data?.title?.slice(0, 40)}..</h1>
           <h1>{data?.viewCount} Views</h1>
+          <h1 className="font-semibold hover:text-blue-400">
+            {data?.author} Views
+          </h1>
         </div>
       </div>
     </Link>

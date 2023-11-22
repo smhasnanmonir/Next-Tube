@@ -6,7 +6,7 @@ import { useState } from "react";
 const NavBarComp = () => {
   const [inputValue, setInputValue] = useState("");
   return (
-    <div className="py-[15px] justify-center place-content-center flex gap-1">
+    <div className="py-[15px] place-content-center flex gap-1">
       <Link href="/" className="block bg-red-500 text-white px-3 py-2 rounded">
         Home
       </Link>

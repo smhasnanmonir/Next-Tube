@@ -1,4 +1,5 @@
 "use client";
+
 import SearchApi from "@/ApiFetch/SearchApi";
 import TrendingVideoBox from "@/TrendingHome/TrendingVideoBox";
 import React from "react";
@@ -6,6 +7,7 @@ import { TailSpin } from "react-loader-spinner";
 
 const SearchPage = ({ params }) => {
   const { data, isLoading } = SearchApi(params?.text);
+
   return (
     <>
       {isLoading ? (
