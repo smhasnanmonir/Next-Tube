@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-const TrendingVideoBox = ({ data }) => {
+const VideoBox = ({ data }) => {
   return (
     <Link
       href={`/video/${data?.videoId}`}
@@ -31,4 +31,4 @@ const TrendingVideoBox = ({ data }) => {
   );
 };
 
-export default TrendingVideoBox;
+export default VideoBox;

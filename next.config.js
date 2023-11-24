@@ -6,7 +6,7 @@ module.exports = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "onion.tube",
+        hostname: "vid.priv.au",
         port: "",
         pathname: "/vi/**",
       },

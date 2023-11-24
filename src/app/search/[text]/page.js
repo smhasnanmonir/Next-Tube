@@ -1,7 +1,7 @@
 "use client";
 
 import SearchApi from "@/ApiFetch/SearchApi";
-import TrendingVideoBox from "@/TrendingHome/TrendingVideoBox";
+import VideoBox from "@/components/VideoBox/VideoBox";
 import React from "react";
 import { TailSpin } from "react-loader-spinner";
 
@@ -29,10 +29,7 @@ const SearchPage = ({ params }) => {
         <>
           <div className="grid md:grid-cols-3 gap-3">
             {data?.map((video) => (
-              <TrendingVideoBox
-                key={video?.videoId}
-                data={video}
-              ></TrendingVideoBox>
+              <VideoBox key={video?.videoId} data={video}></VideoBox>
             ))}
           </div>
         </>
