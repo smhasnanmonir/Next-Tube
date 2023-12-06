@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 import "video-react/dist/video-react.css"; // import css
 import {
@@ -10,9 +11,11 @@ import {
 import VideoDetails from "@/ApiFetch/VideoDetails";
 import { TailSpin } from "react-loader-spinner";
 import VideoBox from "@/components/VideoBox/VideoBox";
+import Link from "next/link";
 
 const VideoPage = ({ params }) => {
   const { data, isLoading } = VideoDetails(params?.id);
+  console.log(data?.authorThumbnails?.[0]);
   return (
     <div className=" py-[2%] md:px-0">
       {isLoading ? (
@@ -37,14 +40,27 @@ const VideoPage = ({ params }) => {
               <ControlBar>
                 <PlaybackRateMenuButton rates={[2, 1.75, 1.5, 1, 0.5]} />
               </ControlBar>
-              <source src={data?.formatStreams?.[2]?.url} />
-            </Player>
-            {/* <video controls autoPlay>
               <source
-                src={data?.formatStreams?.[2]?.url}
-                type="video/mp4"
-              ></source>
-            </video> */}
+                src={
+                  data?.formatStreams?.[2]?.url
+                    ? data?.formatStreams?.[2]?.url
+                    : data?.formatStreams?.[1]?.url
+                }
+              />
+            </Player>
+            <div className="flex gap-3 items-center pt-[10px]">
+              <img
+                className="rounded-full w-[45px]"
+                src={data?.authorThumbnails?.[4]?.url}
+                alt="Channel DP"
+              />
+              <Link
+                className="block hover:text-blue-500 hover:font-semibold transition-all ease-linear duration-200"
+                href={`/channel/${data?.authorId}`}
+              >
+                {data?.author}
+              </Link>
+            </div>
             <div className="mt-[10px]">
               <h1 className="font-semibold mt-[10px]">{data?.title}</h1>
               <div className="flex md:flex-row flex-col  gap-[10px] py-[5px]">
