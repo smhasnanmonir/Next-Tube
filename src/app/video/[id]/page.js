@@ -12,6 +12,7 @@ import VideoDetails from "@/ApiFetch/VideoDetails";
 import { TailSpin } from "react-loader-spinner";
 import VideoBox from "@/components/VideoBox/VideoBox";
 import Link from "next/link";
+import LoadingScreen from "@/components/LoadingScreen/LoadingScreen";
 
 const VideoPage = ({ params }) => {
   const { data, isLoading } = VideoDetails(params?.id);
@@ -20,18 +21,7 @@ const VideoPage = ({ params }) => {
     <div className=" py-[2%] md:px-0">
       {isLoading ? (
         <>
-          <div className="grid place-items-center">
-            <TailSpin
-              height="80"
-              width="80"
-              color="#EE4B2B"
-              ariaLabel="tail-spin-loading"
-              radius="1"
-              wrapperStyle={{}}
-              wrapperClass=""
-              visible={true}
-            />
-          </div>
+          <LoadingScreen></LoadingScreen>
         </>
       ) : (
         <div className="md:grid grid-cols-3 gap-4">
@@ -48,19 +38,19 @@ const VideoPage = ({ params }) => {
                 }
               />
             </Player>
-            <div className="flex gap-3 items-center pt-[10px]">
-              <img
-                className="rounded-full w-[45px]"
-                src={data?.authorThumbnails?.[4]?.url}
-                alt="Channel DP"
-              />
-              <Link
-                className="block hover:text-blue-500 hover:font-semibold transition-all ease-linear duration-200"
-                href={`/channel/${data?.authorId}`}
-              >
-                {data?.author}
-              </Link>
-            </div>
+            <Link
+              className="block hover:text-blue-500 hover:font-semibold transition-all ease-linear duration-200"
+              href={`/channel/${data?.authorId}`}
+            >
+              <div className="flex gap-3 items-center pt-[10px]">
+                <img
+                  className="rounded-full w-[45px]"
+                  src={data?.authorThumbnails?.[4]?.url}
+                  alt="Channel DP"
+                />
+                <h1>{data?.author}</h1>
+              </div>
+            </Link>
             <div className="mt-[10px]">
               <h1 className="font-semibold mt-[10px]">{data?.title}</h1>
               <div className="flex md:flex-row flex-col  gap-[10px] py-[5px]">

@@ -1,35 +1,37 @@
 "use client";
 
 import SearchApi from "@/ApiFetch/SearchApi";
+import LoadingScreen from "@/components/LoadingScreen/LoadingScreen";
 import VideoBox from "@/components/VideoBox/VideoBox";
-import React from "react";
-import { TailSpin } from "react-loader-spinner";
-
+import Link from "next/link";
 const SearchPage = ({ params }) => {
   const { data, isLoading } = SearchApi(params?.text);
-
   return (
     <>
       {isLoading ? (
         <>
-          <div className="grid place-content-center">
-            <TailSpin
-              height="80"
-              width="80"
-              color="#EE4B2B"
-              ariaLabel="tail-spin-loading"
-              radius="1"
-              wrapperStyle={{}}
-              wrapperClass=""
-              visible={true}
-            />
-          </div>
+          <LoadingScreen></LoadingScreen>
         </>
       ) : (
         <>
+          <div className="py-[25px] flex gap-3">
+            {/* <Link
+              className="bg-red-400 text-white inline-block py-[13px] px-[15px] text-[16px] rounded-md font-semibold"
+              href={`/search/${params?.id}`}
+            >
+              Video
+            </Link>
+
+            <Link
+              className="bg-red-400 text-white inline-block py-[13px] px-[15px] text-[16px] rounded-md font-semibold"
+              href={`/search/${params?.id} lala`}
+            >
+              Channel
+            </Link> */}
+          </div>
           <div className="grid md:grid-cols-3 gap-3">
-            {data?.map((video) => (
-              <VideoBox key={video?.videoId} data={video}></VideoBox>
+            {data?.map((video, i) => (
+              <VideoBox key={i} data={video}></VideoBox>
             ))}
           </div>
         </>

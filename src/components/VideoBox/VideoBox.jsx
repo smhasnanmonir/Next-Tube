@@ -10,7 +10,7 @@ const VideoBox = ({ data }) => {
       <div className="px-[10px] pb-[15px]">
         <div className="overflow-hidden">
           <img
-            className="w-full max-h-[200px] object-cover"
+            className="w-full max-h-[200px] object-cover transition-all hover:scale-105 duration-200 ease-linear"
             src={
               data?.videoThumbnails?.[0].url
                 ? data?.videoThumbnails?.[0].url

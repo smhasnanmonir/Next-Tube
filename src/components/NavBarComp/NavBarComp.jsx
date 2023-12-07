@@ -5,6 +5,7 @@ import { useState } from "react";
 
 const NavBarComp = () => {
   const [inputValue, setInputValue] = useState("");
+  const input_array = inputValue.split(" ").join("-");
   return (
     <div className="py-[15px] place-content-center flex gap-1">
       <Link href="/" className="block bg-red-500 text-white px-3 py-2 rounded">
@@ -20,7 +21,7 @@ const NavBarComp = () => {
             type="text"
           />
           <Link
-            href={`/search/${inputValue}`}
+            href={`/search/${input_array}`}
             className="bg-emerald-300 text-white px-3 py-2 rounded"
             type="submit"
           >
