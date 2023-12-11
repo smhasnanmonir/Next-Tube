@@ -13,10 +13,10 @@ const VideoPage = ({ params }) => {
   const { data, isLoading } = VideoDetails(params?.id);
   console.log(data?.authorThumbnails?.[0]);
   const [hideComment, setHideComment] = useState(
-    localStorage.getItem("hideComment") === "true"
+    localStorage?.getItem("hideComment") === "true"
   );
   useEffect(() => {
-    localStorage.setItem("hideComment", hideComment);
+    localStorage?.setItem("hideComment", hideComment);
   }, [hideComment]);
   const toggleHideComment = () => {
     setHideComment(!hideComment);
@@ -99,7 +99,7 @@ const VideoPage = ({ params }) => {
                 {hideComment ? <>Show Comments</> : <>Hide Comments</>}
               </button>
             </div>
-            <div className={`${hideComment ? "hidden" : "block"}`}>
+            <div className={`${hideComment ? "hidden" : "block"} w-[90%]`}>
               <VideoComments video_id={params?.id}></VideoComments>
             </div>
           </div>
