@@ -1,22 +1,26 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 import "video-react/dist/video-react.css"; // import css
-import {
-  Player,
-  ControlBar,
-  PlaybackRateMenuButton,
-  ReplayControl,
-  ForwardControl,
-} from "video-react";
+import { Player, ControlBar, PlaybackRateMenuButton } from "video-react";
 import VideoDetails from "@/ApiFetch/VideoDetails";
-import { TailSpin } from "react-loader-spinner";
 import VideoBox from "@/components/VideoBox/VideoBox";
 import Link from "next/link";
 import LoadingScreen from "@/components/LoadingScreen/LoadingScreen";
+import VideoComments from "@/components/VideoComments/VideoComments";
+import { useEffect, useState } from "react";
 
 const VideoPage = ({ params }) => {
   const { data, isLoading } = VideoDetails(params?.id);
   console.log(data?.authorThumbnails?.[0]);
+  const [hideComment, setHideComment] = useState(
+    localStorage.getItem("hideComment") === "true"
+  );
+  useEffect(() => {
+    localStorage.setItem("hideComment", hideComment);
+  }, [hideComment]);
+  const toggleHideComment = () => {
+    setHideComment(!hideComment);
+  };
   return (
     <div className=" py-[2%] md:px-0">
       {isLoading ? (
@@ -51,8 +55,21 @@ const VideoPage = ({ params }) => {
                 <h1>{data?.author}</h1>
               </div>
             </Link>
-            <div className="mt-[10px]">
-              <h1 className="font-semibold mt-[10px]">{data?.title}</h1>
+
+            <div className="flex gap-3 py-[5px]">
+              <h1>
+                {" "}
+                <span className="font-semibold">Published:</span>{" "}
+                {data?.publishedText}
+              </h1>
+              <h1>
+                {" "}
+                <span className="font-semibold">Likes:</span> {data?.likeCount}
+              </h1>
+            </div>
+
+            <div className="">
+              <h1 className="font-semibold text-2xl pb-[4px]">{data?.title}</h1>
               <div className="flex md:flex-row flex-col  gap-[10px] py-[5px]">
                 <a
                   className="text-center px-2 py-2 bg-red-500 rounded-md text-white hover:bg-red-600"
@@ -72,6 +89,18 @@ const VideoPage = ({ params }) => {
                   Download Audio
                 </a>
               </div>
+            </div>
+            <div className="py-[6px] flex gap-3 items-center">
+              <h1 className="font-semibold">Comments</h1>
+              <button
+                className="px-[7px] py-[5px] bg-yellow-300 rounded-md"
+                onClick={() => toggleHideComment()}
+              >
+                {hideComment ? <>Show Comments</> : <>Hide Comments</>}
+              </button>
+            </div>
+            <div className={`${hideComment ? "hidden" : "block"}`}>
+              <VideoComments video_id={params?.id}></VideoComments>
             </div>
           </div>
           <div className="grid gap-4 md:py-0 py-[5%]">

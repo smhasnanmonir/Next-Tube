@@ -8,7 +8,6 @@ const page = ({ params }) => {
   const { data, isLoading, error } = ReuseableFetch(
     `https://vid.priv.au/api/v1/videos/${params?.id}`
   );
-  console.log(error);
   return (
     <div>
       {isLoading ? (
@@ -32,7 +31,11 @@ const page = ({ params }) => {
                 <div className="flex md:flex-row flex-col  gap-[10px] py-[5px]">
                   <a
                     className="text-center px-2 py-2 bg-red-500 rounded-md text-white hover:bg-red-600"
-                    href={data?.formatStreams?.[2]?.url}
+                    href={
+                      data?.formatStreams?.[2]?.url
+                        ? data?.formatStreams?.[2]?.url
+                        : data?.formatStreams?.[1]?.url
+                    }
                     download={`${data?.title}.mp4`}
                     target="_blank"
                   >
