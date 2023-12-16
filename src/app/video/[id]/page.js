@@ -99,7 +99,7 @@ const VideoPage = ({ params }) => {
                 {hideComment ? <>Show Comments</> : <>Hide Comments</>}
               </button>
             </div>
-            <div className={`${hideComment ? "hidden" : "block"} w-[90%]`}>
+            <div className={`${hideComment ? "hidden" : "block"} md:w-[90%]`}>
               <VideoComments video_id={params?.id}></VideoComments>
             </div>
           </div>
