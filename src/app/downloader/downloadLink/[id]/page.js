@@ -6,7 +6,7 @@ import LoadingScreen from "@/components/LoadingScreen/LoadingScreen";
 
 const page = ({ params }) => {
   const { data, isLoading, error } = ReuseableFetch(
-    `https://invidious.slipfox.xyz/api/v1/videos/${params?.id}`
+    `https://vid.priv.au/api/v1/videos/${params?.id}`
   );
   return (
     <div>

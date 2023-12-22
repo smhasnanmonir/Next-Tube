@@ -7,7 +7,7 @@ import VideoBox from "@/components/VideoBox/VideoBox";
 
 const ChannelPage = ({ params }) => {
   const { data, isLoading } = ReuseableFetch(
-    `https://invidious.slipfox.xyz/api/v1/channels/${params?.id}`
+    `https://vid.priv.au/api/v1/channels/${params?.id}`
   );
   return (
     <>
