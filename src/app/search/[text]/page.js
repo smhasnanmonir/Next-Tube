@@ -30,8 +30,12 @@ const SearchPage = ({ params }) => {
             </Link> */}
           </div>
           <div className="grid md:grid-cols-3 gap-3">
-            {data?.map((video, i) => (
-              <VideoBox key={i} data={video}></VideoBox>
+            {data?.map((search_data, i) => (
+              <VideoBox
+                key={i}
+                type={search_data?.type}
+                data={search_data}
+              ></VideoBox>
             ))}
           </div>
         </>
