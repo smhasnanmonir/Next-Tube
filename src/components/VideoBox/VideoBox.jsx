@@ -67,7 +67,7 @@ const VideoBox = ({ data, type }) => {
           </div>
           <div className="space-y-[3px] pt-[3px]">
             <h1>{data?.title?.slice(0, 40)}..</h1>
-            <h1 className={type == "video" ? "hidden" : "block"}>
+            <h1 className={type == "playlistVideo" ? "hidden" : "block"}>
               {data?.viewCount} Views
             </h1>
             <h1 className="font-semibold hover:text-blue-400">

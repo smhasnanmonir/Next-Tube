@@ -46,7 +46,7 @@ const page = ({ params }) => {
           </div>
           <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-3 pt-[15px]">
             {data?.videos?.map((video, i) => (
-              <VideoBox data={video} type="video" key={i}></VideoBox>
+              <VideoBox data={video} type="playlistVideo" key={i}></VideoBox>
             ))}
           </div>
         </>

@@ -20,7 +20,7 @@ const ChannelPage = ({ params }) => {
           <div className="">
             <img
               className="brightness-50 w-full h-[250px] object-cover"
-              src={data?.authorBanners?.[0].url}
+              src={data?.authorBanners?.[0]?.url}
               alt=""
               srcset=""
             />
