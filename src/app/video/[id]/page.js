@@ -88,6 +88,13 @@ const VideoPage = ({ params }) => {
                 >
                   Download Audio
                 </a>
+                <a
+                  className="text-center px-2 py-2 bg-orange-500 rounded-md text-white hover:bg-orange-600"
+                  href={`https://youtu.be/${params?.id}`}
+                  target="_blank"
+                >
+                  Open in Youtube
+                </a>
               </div>
             </div>
             <div className="py-[6px] flex gap-3 items-center">
