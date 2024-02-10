@@ -8,7 +8,7 @@ import Link from "next/link";
 
 const page = ({ params }) => {
   const { data, isLoading, isError } = ReuseableFetch(
-    `https://vid.priv.au/api/v1/playlists/${params?.id}`
+    `https://invidious.jing.rocks/api/v1/playlists/${params?.id}`
   );
   return (
     <div>

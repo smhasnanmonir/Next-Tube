@@ -1,5 +1,5 @@
 const TrendingVideos = async () => {
-  const url = "https://vid.priv.au/api/v1/trending";
+  const url = "https://invidious.jing.rocks/api/v1/trending";
   const res = await fetch(url, { next: { revalidate: 3600 } });
   return res.json();
 };

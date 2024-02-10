@@ -6,7 +6,7 @@ module.exports = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "vid.priv.au",
+        hostname: "inv.us.projectsegfau.lt",
         port: "",
         pathname: "/vi/**",
       },

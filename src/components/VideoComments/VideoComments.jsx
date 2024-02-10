@@ -6,7 +6,7 @@ import LoadingScreen from "../LoadingScreen/LoadingScreen";
 
 const VideoComments = ({ video_id }) => {
   const { data, error, isLoading } = ReuseableFetch(
-    `https://vid.priv.au/api/v1/comments/${video_id}`
+    `https://invidious.jing.rocks/api/v1/comments/${video_id}`
   );
   console.log("from comments page", data);
   console.log(video_id);
