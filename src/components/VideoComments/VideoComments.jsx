@@ -5,14 +5,14 @@ import ReuseableFetch from "@/ApiFetch/ReuseableFetch";
 import LoadingScreen from "../LoadingScreen/LoadingScreen";
 
 const VideoComments = ({ video_id }) => {
-  const { data, error, isLoading } = ReuseableFetch(
-    `https://invidious.jing.rocks/api/v1/comments/${video_id}`
-  );
-  console.log("from comments page", data);
-  console.log(video_id);
+  // const { data, error, isLoading } = ReuseableFetch(
+  //   `https://invidious.jing.rocks/api/v1/comments/${video_id}`
+  // );
+  // console.log("from comments page", data);
+  // console.log(video_id);
   return (
     <div>
-      {isLoading ? (
+      {/* {isLoading ? (
         <>
           <LoadingScreen></LoadingScreen>
         </>
@@ -36,7 +36,7 @@ const VideoComments = ({ video_id }) => {
             ))}
           </div>
         </>
-      )}
+      )} */}
     </div>
   );
 };

@@ -8,8 +8,9 @@ import Link from "next/link";
 
 const page = ({ params }) => {
   const { data, isLoading, isError } = ReuseableFetch(
-    `https://invidious.jing.rocks/api/v1/playlists/${params?.id}`
+    `https://pipedapi.kavin.rocks/playlists/${params?.id}`
   );
+  console.log(data);
   return (
     <div>
       {isLoading ? (
@@ -21,31 +22,31 @@ const page = ({ params }) => {
           <div className="grid place-content-center">
             <img
               className="object-cover w-screen h-[350px] rounded-md"
-              src={data?.playlistThumbnail}
-              alt={data?.title}
+              src={data?.thumbnailUrl}
+              alt={data?.name}
               srcset=""
             />
             <Link
               className="max-w-fit flex items-center gap-3 py-[13px] pl-[10px]"
-              href={`${data?.authorUrl}`}
+              href={`${data?.uploader}`}
             >
               <img
                 className="rounded-full"
-                src={data?.authorThumbnails[4]?.url}
+                src={data?.uploaderAvatar}
                 alt=""
                 srcset=""
               />
               <div>
-                <h1>{data?.author}</h1>
+                <h1>{data?.uploader}</h1>
               </div>
             </Link>
             <div className="pl-[10px]">
-              <p>Total videos: {data?.videoCount}</p>
-              <p>Views: {data?.viewCount}</p>
+              <p>Total videos: {data?.videos}</p>
+              <p>Views: {data?.views}</p>
             </div>
           </div>
           <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-3 pt-[15px]">
-            {data?.videos?.map((video, i) => (
+            {data?.relatedStreams?.slice(2)?.map((video, i) => (
               <VideoBox data={video} type="playlistVideo" key={i}></VideoBox>
             ))}
           </div>

@@ -6,6 +6,7 @@ import VideoBox from "@/components/VideoBox/VideoBox";
 import Link from "next/link";
 const SearchPage = ({ params }) => {
   const { data, isLoading } = SearchApi(params?.text);
+  console.log(data);
   return (
     <>
       {isLoading ? (
@@ -30,7 +31,7 @@ const SearchPage = ({ params }) => {
             </Link> */}
           </div>
           <div className="grid md:grid-cols-3 gap-3">
-            {data?.map((search_data, i) => (
+            {data?.items?.map((search_data, i) => (
               <VideoBox
                 key={i}
                 type={search_data?.type}

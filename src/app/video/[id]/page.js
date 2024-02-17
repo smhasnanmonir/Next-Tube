@@ -8,10 +8,15 @@ import Link from "next/link";
 import LoadingScreen from "@/components/LoadingScreen/LoadingScreen";
 import VideoComments from "@/components/VideoComments/VideoComments";
 import { useEffect, useState } from "react";
+// import { tree } from "next/dist/build/templates/app-page";
 
 const VideoPage = ({ params }) => {
   const { data, isLoading } = VideoDetails(params?.id);
-  console.log(data?.authorThumbnails?.[0]);
+  console.log(data);
+  const videoWithAudio = data?.videoStreams?.filter(
+    (video_data) => video_data.videoOnly != true
+  );
+  console.log(videoWithAudio);
   const [hideComment, setHideComment] = useState(
     localStorage?.getItem("hideComment") === "true"
   );
@@ -30,29 +35,23 @@ const VideoPage = ({ params }) => {
       ) : (
         <div className="md:grid grid-cols-3 gap-4">
           <div className="col-span-2">
-            <Player autoPlay poster={data?.videoThumbnails?.[0]} startTime={0}>
+            <Player autoPlay poster={data?.thumbnailUrl} startTime={0}>
               <ControlBar>
                 <PlaybackRateMenuButton rates={[2, 1.75, 1.5, 1, 0.5]} />
               </ControlBar>
-              <source
-                src={
-                  data?.formatStreams?.[2]?.url
-                    ? data?.formatStreams?.[2]?.url
-                    : data?.formatStreams?.[1]?.url
-                }
-              />
+              <source src={videoWithAudio?.[1]?.url} />
             </Player>
             <Link
-              className="block hover:text-blue-500 hover:font-semibold transition-all ease-linear duration-200"
-              href={`/channel/${data?.authorId}`}
+              className="block max-w-fit hover:text-blue-500 hover:font-semibold transition-all ease-linear duration-200"
+              href={`${data?.uploaderUrl}`}
             >
               <div className="flex gap-3 items-center pt-[10px]">
                 <img
                   className="rounded-full w-[45px]"
-                  src={data?.authorThumbnails?.[4]?.url}
+                  src={data?.uploaderAvatar}
                   alt="Channel DP"
                 />
-                <h1>{data?.author}</h1>
+                <h1 className="font-semibold">{data?.uploader}</h1>
               </div>
             </Link>
 
@@ -60,11 +59,11 @@ const VideoPage = ({ params }) => {
               <h1>
                 {" "}
                 <span className="font-semibold">Published:</span>{" "}
-                {data?.publishedText}
+                {data?.uploadDate?.slice(0, 10)}
               </h1>
               <h1>
                 {" "}
-                <span className="font-semibold">Likes:</span> {data?.likeCount}
+                <span className="font-semibold">Likes:</span> {data?.likes}
               </h1>
             </div>
 
@@ -73,7 +72,7 @@ const VideoPage = ({ params }) => {
               <div className="flex md:flex-row flex-col  gap-[10px] py-[5px]">
                 <a
                   className="text-center px-2 py-2 bg-red-500 rounded-md text-white hover:bg-red-600"
-                  href={data?.formatStreams?.[2]?.url}
+                  href={videoWithAudio?.[1]?.url}
                   download={`${data?.title}.mp4`}
                   target="_blank"
                 >
@@ -81,7 +80,7 @@ const VideoPage = ({ params }) => {
                 </a>
                 <a
                   className="text-center px-2 py-2 bg-green-500 rounded-md text-white hover:bg-green-600"
-                  href={data?.adaptiveFormats?.[4]?.url}
+                  href={data?.audioStreams?.[1]?.url}
                   type="audio"
                   download={`${data?.title}.mp3`}
                   target="_blank"
@@ -112,7 +111,7 @@ const VideoPage = ({ params }) => {
           </div>
           <div className="grid gap-4 md:py-0 py-[5%]">
             <h1 className="font-semibold md:text-center">Recommended Videos</h1>
-            {data?.recommendedVideos?.map((recVid) => (
+            {data?.relatedStreams?.slice(2)?.map((recVid) => (
               <VideoBox key={recVid?.videoId} data={recVid}></VideoBox>
             ))}
           </div>

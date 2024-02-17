@@ -1,15 +1,32 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
-
-module.exports = {
-  images: {
-    remotePatterns: [
+const nextConfig = {
+  async headers() {
+    return [
       {
-        protocol: "https",
-        hostname: "inv.us.projectsegfau.lt",
-        port: "",
-        pathname: "/vi/**",
+        // matching all API routes
+        source: "/api/:path*",
+        headers: [
+          { key: "Access-Control-Allow-Credentials", value: "true" },
+          {
+            key: "Access-Control-Allow-Origin",
+            value: "https://invidious.jing.rocks", // replace this with your actual origin
+          },
+          {
+            key: "Access-Control-Allow-Methods",
+            value: "GET,DELETE,PATCH,POST,PUT",
+          },
+          {
+            key: "Access-Control-Allow-Headers",
+            value:
+              "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
+          },
+        ],
       },
-    ],
+    ];
+  },
+  images: {
+    domains: ["invidious.jing.rocks"], // specify the domains from which images will be allowed
   },
 };
+
+module.exports = nextConfig;
