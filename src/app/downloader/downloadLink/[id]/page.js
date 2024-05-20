@@ -6,7 +6,7 @@ import LoadingScreen from "@/components/LoadingScreen/LoadingScreen";
 
 const page = ({ params }) => {
   const { data, isLoading, error } = ReuseableFetch(
-    `https://invidious.jing.rocks/api/v1/videos/${params?.id}`
+    ` 	https://piped-api.lunar.icu/api/v1/videos/${params?.id}`
   );
   return (
     <div>

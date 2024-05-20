@@ -1,7 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
-import "video-react/dist/video-react.css"; // import css
-import { Player, ControlBar, PlaybackRateMenuButton } from "video-react";
 import VideoDetails from "@/ApiFetch/VideoDetails";
 import VideoBox from "@/components/VideoBox/VideoBox";
 import Link from "next/link";
@@ -9,6 +7,9 @@ import LoadingScreen from "@/components/LoadingScreen/LoadingScreen";
 import VideoComments from "@/components/VideoComments/VideoComments";
 import { useEffect, useState } from "react";
 // import { tree } from "next/dist/build/templates/app-page";
+import { Replay } from "vimond-replay";
+import HlsjsVideoStreamer from "vimond-replay/video-streamer/hlsjs";
+import "vimond-replay/index.css";
 
 const VideoPage = ({ params }) => {
   const { data, isLoading } = VideoDetails(params?.id);
@@ -26,6 +27,10 @@ const VideoPage = ({ params }) => {
   const toggleHideComment = () => {
     setHideComment(!hideComment);
   };
+  const playerStyle = {
+    width: "100%",
+    // Add more styles as needed
+  };
   return (
     <div className=" py-[2%] md:px-0">
       {isLoading ? (
@@ -35,12 +40,13 @@ const VideoPage = ({ params }) => {
       ) : (
         <div className="md:grid grid-cols-3 gap-4">
           <div className="col-span-2">
-            <Player autoPlay poster={data?.thumbnailUrl} startTime={0}>
-              <ControlBar>
-                <PlaybackRateMenuButton rates={[2, 1.75, 1.5, 1, 0.5]} />
-              </ControlBar>
-              <source src={videoWithAudio?.[1]?.url} />
-            </Player>
+            <Replay
+              source={data?.hls}
+              initialPlaybackProps={{ isPaused: false }}
+            >
+              <HlsjsVideoStreamer />
+            </Replay>
+            {/* <ReactPlayer url={data?.hls}></ReactPlayer> */}
             <Link
               className="block max-w-fit hover:text-blue-500 hover:font-semibold transition-all ease-linear duration-200"
               href={`${data?.uploaderUrl}`}

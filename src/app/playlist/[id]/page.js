@@ -8,7 +8,7 @@ import Link from "next/link";
 
 const page = ({ params }) => {
   const { data, isLoading, isError } = ReuseableFetch(
-    `https://pipedapi.kavin.rocks/playlists/${params?.id}`
+    ` 	https://piped-api.lunar.icu/playlists/${params?.id}`
   );
   console.log(data);
   return (

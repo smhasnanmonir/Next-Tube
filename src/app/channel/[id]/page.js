@@ -7,7 +7,7 @@ import VideoBox from "@/components/VideoBox/VideoBox";
 
 const ChannelPage = ({ params }) => {
   const { data, isLoading } = ReuseableFetch(
-    `https://pipedapi.kavin.rocks/channel/${params?.id}`
+    ` 	https://piped-api.lunar.icu/channel/${params?.id}`
   );
   console.log(data);
   return (
